@@ -1,3 +1,5 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+
 function Load(name)
 	local resourceName = GetCurrentResourceName()
 	local chunk = LoadResourceFile(resourceName, ('data/%s.lua'):format(name))
@@ -53,7 +55,7 @@ Config.CircleZones = {
 }
 
 Config.BoxZones = {
-
+  
 }
 
 Config.PolyZones = {
@@ -70,6 +72,20 @@ Config.TargetEntities = {
 
 
 Config.TargetModels = {
+	["lifehackerhack"] = {
+		models = {
+			394821236,
+		},
+		options = {
+			{
+				type = "client",
+				event = "qb-cnr:cryptohack",
+				icon = "fas fa-circle",
+				label = "Steal some cryptocurrency from Avon",
+			},
+		},
+		distance = 2.5,
+	},
 	["24/7-SHOPS"] = {
 		models = {
 			"mp_m_shopkeep_01",
@@ -126,6 +142,60 @@ Config.TargetModels = {
         },
         distance = 2.5,
     },
+	["blackmarket"] = {
+		models = {
+			"ig_lestercrest_2"
+		},
+        options = {
+            {
+                type = "client",
+                event =  "qb-shops:marketshop",
+                icon = "fas fa-wrench",
+                label = "Buy tools for the job",
+				canInteract = function(entity) 
+					local Player = QBCore.Functions.GetPlayerData()
+					if Player.job.name == "police" then 
+						return false
+					else 
+						print("canInteract")
+						return true 
+					end
+				end
+            },
+			{
+                type = "client",
+                event =  "qb-cnr:client:sellMarkedBills",
+                icon = "fas fa-money-bill",
+                label = "Sell your dirty cash",
+				canInteract = function(entity) 
+					local Player = QBCore.Functions.GetPlayerData()
+					if Player.job.name == "police" then 
+						return false
+					else 
+						print("canInteract")
+						return true 
+					end
+				end
+            },
+			{
+                type = "client",
+                event =  "qb-cnr:client:liHeistMenu",
+                icon = "fas fa-money-bill-wave",
+                label = "Double your dirty cash",
+				canInteract = function(entity) 
+					local Player = QBCore.Functions.GetPlayerData()
+					if Player.job.name == "police" then 
+						return false
+					else 
+						print("canInteract")
+						return true 
+					end
+				end
+            },
+        },
+        distance = 2.5,
+
+	}
 
 }
 
@@ -177,10 +247,18 @@ Config.Peds = {
         freeze = false,
         invincible = true,
         blockevents = true,
+		options = {
+			{
+                type = "client",
+                event =  "qb-shops:marketshop",
+                icon = "fas fa-wrench",
+                label = "Mechanic",
+			},
+		}
 	},
 	{
-		model = 'mp_m_waremech_01',
-        coords = vector4(102.8, 6614.09, 32.44, 322.01),
+		model = 'ig_lestercrest_2',
+        coords = vector4(706.37, -967.0, 30.41, 345.29),
         gender = 'male',
         freeze = false,
         invincible = true,
