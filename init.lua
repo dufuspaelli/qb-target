@@ -152,6 +152,7 @@ Config.TargetModels = {
                 event =  "qb-shops:marketshop",
                 icon = "fas fa-wrench",
                 label = "Buy tools for the job",
+				num = 1,
 				canInteract = function(entity) 
 					local Player = QBCore.Functions.GetPlayerData()
 					if Player.job.name == "police" then 
@@ -167,6 +168,7 @@ Config.TargetModels = {
                 event =  "qb-cnr:client:sellMarkedBills",
                 icon = "fas fa-money-bill",
                 label = "Sell your dirty cash",
+				num = 2,
 				canInteract = function(entity) 
 					local Player = QBCore.Functions.GetPlayerData()
 					if Player.job.name == "police" then 
@@ -182,6 +184,7 @@ Config.TargetModels = {
                 event =  "qb-cnr:client:liHeistMenu",
                 icon = "fas fa-money-bill-wave",
                 label = "Double your dirty cash",
+				num = 3,
 				canInteract = function(entity) 
 					local Player = QBCore.Functions.GetPlayerData()
 					if Player.job.name == "police" then 
@@ -193,6 +196,48 @@ Config.TargetModels = {
 				end
             },
         },
+        distance = 2.5,
+
+	}, 
+	["truckers"] = {
+		models = {
+			"s_m_m_dockwork_01"
+		},
+        options = {
+            {
+                type = "client",
+                event =  "qb-cnr:startdelivery",
+                icon = "fas fa-truck-loading",
+                label = "Start a truck delivery",
+				num = 1,
+				canInteract = function(entity) 
+					local Player = QBCore.Functions.GetPlayerData()
+					if Player.job.name == "police" then 
+						return false
+					else 
+						print("canInteract")
+						return true 
+					end
+				end
+            },
+			{
+                type = "client",
+                event =  "qb-cnr:client:buyTruck",
+                icon = "fas fa-money-bill-wave",
+                label = "Rent a truck",
+				num = 2,
+				canInteract = function(entity) 
+					local Player = QBCore.Functions.GetPlayerData()
+					if Player.job.name == "police" then 
+						return false
+					else 
+						print("canInteract")
+						return true 
+					end
+				end
+            },
+        },
+		
         distance = 2.5,
 
 	}
@@ -259,6 +304,14 @@ Config.Peds = {
 	{
 		model = 'ig_lestercrest_2',
         coords = vector4(706.37, -967.0, 30.41, 345.29),
+        gender = 'male',
+        freeze = false,
+        invincible = true,
+        blockevents = true,
+	},
+	{
+		model = 's_m_m_dockwork_01',
+        coords = vector4(154.02, -3215.04, 5.93, 71.43),
         gender = 'male',
         freeze = false,
         invincible = true,
