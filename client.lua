@@ -745,7 +745,7 @@ function SpawnPeds()
 					})
 				end
 			end
-
+			Entity(spawnedped).state.shopped = true
 			Config.Peds[k].currentpednumber = spawnedped
 		end
 	end
